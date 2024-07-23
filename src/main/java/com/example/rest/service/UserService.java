@@ -1,7 +1,7 @@
 package com.example.rest.service;
 
 import com.example.rest.model.User;
-import com.example.rest.repository.UserRepository;
+import com.example.rest.repository.JdbcRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private JdbcRepository userRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
