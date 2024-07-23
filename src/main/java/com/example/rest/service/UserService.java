@@ -28,13 +28,8 @@ public class UserService {
     }
 
     public User updateUser(String id, String username, String password) {
-        User user = userRepository.findById(id);
-        if (user != null) {
-            user.setUsername(username);
-            user.setPassword(password);
-            return userRepository.save(user);
-        }
-        return null;
+        User user = new User(id, username, password);
+        return userRepository.save(user);
     }
 
     public boolean deleteUser(String id) {
