@@ -33,8 +33,7 @@ public class UserService {
     }
 
     public boolean deleteUser(String id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null) {
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return true;
         }
