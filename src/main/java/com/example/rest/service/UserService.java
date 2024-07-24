@@ -1,7 +1,7 @@
 package com.example.rest.service;
 
 import com.example.rest.model.User;
-import com.example.rest.repository.JdbcRepository;
+import com.example.rest.repository.UserJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +12,14 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    private JdbcRepository userRepository;
+    private UserJpaRepository userRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public User getUserById(String id) {
-        return userRepository.findById(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     public User createUser(String username, String password) {
@@ -33,7 +33,7 @@ public class UserService {
     }
 
     public boolean deleteUser(String id) {
-        User user = userRepository.findById(id);
+        User user = userRepository.findById(id).orElse(null);
         if (user != null) {
             userRepository.deleteById(id);
             return true;
