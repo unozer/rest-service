@@ -22,6 +22,33 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/name/{name}")
+    public User getUserByName(@PathVariable String name) {
+        User user = userService.getUserByName(name);
+        if (user == null) {
+            throw new UserNotFoundException("User not found with name: " + name);
+        }
+        return user;
+    }
+
+    @GetMapping("/password/{password}")
+    public User getUserByPassword(@PathVariable String password) {
+        User user = userService.getUserByPassword(password);
+        if (user == null) {
+            throw new UserNotFoundException("User not found with password: " + password);
+        }
+        return user;
+    }
+
+    @GetMapping("/name-prefix/{prefix}")
+    public List<User> getUserByNamePrefix(@PathVariable String prefix) {
+        List<User> user = userService.getUserByPrefix(prefix);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("No username starting with prefix: " + prefix);
+        }
+        return user;
+    }
+
     @GetMapping("/{id}")
     public User getUserById(@PathVariable String id) {
         User user = userService.getUserById(id);

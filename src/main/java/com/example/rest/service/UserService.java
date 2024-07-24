@@ -22,6 +22,18 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
+    public User getUserByName(String name) {
+        return userRepository.findByUsername(name);
+    }
+
+    public User getUserByPassword(String password) {
+        return userRepository.findByPassword(password);
+    }
+
+    public List<User> getUserByPrefix(String prefix) {
+        return userRepository.findByUsernameStartingWith(prefix);
+    }
+
     public User createUser(String username, String password) {
         User newUser = new User(UUID.randomUUID().toString(), username, password);
         return userRepository.save(newUser);
